@@ -14,7 +14,7 @@ Command to implement
 - Last day water -> /acquaIeri
 - Report water last week -> /reportIdrico
 ADD TO LIST
-- Check Garden -> /giardino
+- Check Garden -> /giardino ok
 '''
 
 global myGarden
@@ -54,7 +54,21 @@ def createGardenCommand(message):
 def welcomeCommand(message):
     print(myGarden)
     if (checkMyGarden()):
-        bot.reply_to(message, "Nel mio sistema è già presente un giardino registrato")
+        str = "Giardino " + myGarden.name + '\n'
+        for plant in myGarden.plants:
+            str = str + "- " + plant.name + " " + plant.quantity + "\n"
+        bot.reply_to(message, str)
+    else:
+        bot.reply_to(message,"Nel mio sistema non è presente nessun giarino registrato")
+
+@bot.message_handler(commands=['acquaIeri'])
+def welcomeCommand(message):
+    print(myGarden)
+    if (checkMyGarden()):
+        str = "Giardino " + myGarden.name + '\n'
+        for plant in myGarden.plants:
+            str = str + "- " + plant.name + " " + plant.quantity + "\n"
+        bot.reply_to(message, str)
     else:
         bot.reply_to(message,"Nel mio sistema non è presente nessun giarino registrato")
 
